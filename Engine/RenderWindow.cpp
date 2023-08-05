@@ -1,6 +1,5 @@
 #include "RenderWindow.h"
 
-
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
@@ -16,7 +15,9 @@ RenderWindow::RenderWindow(int width, int height)
 
 void RenderWindow::Update()
 {
-    //m_Player = new Entity();
+    m_Player = new Player(m_Renderer);
+    m_Entities.push_back(*m_Player);
+
 
     // Initialize random seed
     srand(time(NULL));
@@ -44,62 +45,54 @@ void RenderWindow::Update()
 
 void RenderWindow::Render()
 {
+    Uint64 NOW = SDL_GetPerformanceCounter();
+    Uint64 LAST = 0;
+    double deltaTime = 0;
+
     while (!m_Quit)
     {
-        while (SDL_PollEvent(&m_Event))
+        LAST = NOW;
+        NOW = SDL_GetPerformanceCounter();
+
+        deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+
+        ReadInput();  // Move input handling out of the event loop
+
+        SDL_RenderClear(m_Renderer);
+        m_RenderSystem.Update(m_Entities);
+        m_NPCMovementSystem.Update(m_Entities);
+
+        SDL_RenderPresent(m_Renderer);
+
+        // Update player's movement every frame
+        m_Player->Update(deltaTime);
+
+        // Handle any pending SDL events
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
         {
-            if (m_Event.type == SDL_QUIT)
+            if (event.type == SDL_QUIT)
             {
                 m_Quit = true;
             }
-            ReadInput();
-
-            SDL_RenderClear(m_Renderer); // Clear the renderer with the selected color
-            // Render your content here
-            m_RenderSystem.Update(m_Entities);
-            m_NPCMovementSystem.Update(m_Entities);
-
-            SDL_RenderPresent(m_Renderer); // Present the renderer
-            // You can add your rendering and game logic here
         }
     }
 }
 
 void RenderWindow::ReadInput()
 {
-    // Read sdl events
-    SDL_PollEvent(&m_Event);
-    // Get all keys here
     const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-    // Quit / close our window by pressing escape
-    if (keystates[SDL_SCANCODE_ESCAPE]) 
+    // Quit / close the window by pressing escape
+    if (keystates[SDL_SCANCODE_ESCAPE])
     {
         m_Quit = true;
     }
-    
-    //if (m_Player != nullptr)
-    //{
-    //    if (m_Event.type == SDL_KEYDOWN) {
-    //        switch (m_Event.key.keysym.sym) {
-    //        case SDLK_UP:
-    //            // Update KeyInputComponent for "up" key
-    //            m_Player->GetComponent<KeyInputComponent>()->upKey = true;
-    //            break;
-    //            // Handle other key events similarly
-    //        }
-    //    }
-    //    if (m_Event.type == SDL_KEYUP) {
-    //        switch (m_Event.key.keysym.sym) {
-    //        case SDLK_UP:
-    //            // Update KeyInputComponent for "up" key release
-    //            m_Player->GetComponent<KeyInputComponent>()->upKey = false;
-    //            break;
-    //            // Handle other key events similarly
-    //        }
-    //    }
-    //}
 
+    if (m_Player)
+    {
+        m_Player->HandleInput(keystates);
+    }
 }
 
 void RenderWindow::CreateWindow(int width, int height)

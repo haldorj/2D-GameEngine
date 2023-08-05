@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 
 #include "Systems.h"
+#include "Player.h"
 
 #include <vector>
 
@@ -25,7 +26,7 @@ public:
 	~RenderWindow();
 
 private:
-	//Entity* m_Player;
+	Player* m_Player;
 
 	std::vector<Entity> m_Entities;
 	// Create entities and add components

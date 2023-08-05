@@ -14,23 +14,19 @@ public:
 
 struct SpriteComponent : public Component
 {
-    Texture* Sprite;
+    Texture* Sprite = nullptr;
 };
 
 struct TransformComponent : public Component
 {
-    glm::vec2 Position;
+    glm::vec2 Position = glm::vec2(0.0f, 0.0f);
 };
 
 struct VelocityComponent : public Component
 {
-    glm::vec2 Velocity;
+    glm::vec2 Velocity = glm::vec2(0.0f, 0.0f);;
 };
 
 struct KeyInputComponent : public Component
 {
-    bool upKey = false;
-    bool downKey = false;
-    bool leftKey = false;
-    bool rightKey = false;
 };
