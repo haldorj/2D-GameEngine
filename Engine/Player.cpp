@@ -10,37 +10,48 @@ Player::Player(SDL_Renderer* renderer)
     m_Transform->Position.x = 100.0f;
     m_Transform->Position.y = 100.0f;
 
-    m_Velocity = new VelocityComponent();
-    m_Velocity->Velocity.x = 1.0f;
-    m_Velocity->Velocity.y = 1.0f;
+    m_Movement = new MovementComponent();
+    m_Movement->Velocity.x = Speed; m_Movement->Velocity.y = Speed;
 
     m_KeyInput = new KeyInputComponent();
 
     // Add the components to the entity
     AddComponent(m_Sprite);
     AddComponent(m_Transform);
-    AddComponent(m_Velocity);
+    AddComponent(m_Movement);
     AddComponent(m_KeyInput);
 }
 
 void Player::HandleInput(const Uint8* keystates)
 {
-    // Update the player's movement state based on keys
+    // Update the player's velocity based on keys
 
-    if (keystates[SDL_SCANCODE_A]) { m_MovementState.x -= m_Velocity->Velocity.x; }
-    if (keystates[SDL_SCANCODE_D]) { m_MovementState.x += m_Velocity->Velocity.x; }
-    if (keystates[SDL_SCANCODE_W]) { m_MovementState.y -= m_Velocity->Velocity.y; }
-    if (keystates[SDL_SCANCODE_S]) { m_MovementState.y += m_Velocity->Velocity.y; }
+    if (keystates[SDL_SCANCODE_A]) { m_Movement->Velocity.x = -Speed; }
+    else if (keystates[SDL_SCANCODE_D]) { m_Movement->Velocity.x = Speed; }
+    else { m_Movement->Velocity.x = 0.0f; }
+
+    if (keystates[SDL_SCANCODE_SPACE] && IsOnGround)
+    {
+        m_Movement->Velocity.y = -JumpForce;
+        IsJumping = true;
+        IsOnGround = false;
+    }
 }
 
 void Player::Update(float deltaTime)
 {
-    // Update player's position based on movement state and delta time
-    m_Transform->Position.x += m_MovementState.x * deltaTime;
-    m_Transform->Position.y += m_MovementState.y * deltaTime;
+    // Apply gravity for falling if not jumping and not on ground
+    if (!IsOnGround && !IsJumping)
+    {
+        m_Movement->Velocity.y += Gravity * deltaTime;
+        IsFalling = true;
+    }
 
-    m_MovementState = { 0.0f, 0.0f };
+    // Update player's position based on velocity and delta time
+    m_Transform->Position.x += m_Movement->Velocity.x * deltaTime;
+    m_Transform->Position.y += m_Movement->Velocity.y * deltaTime;
 
+    // Boundaries check
     if (m_Transform->Position.x <= 0)
     {
         m_Transform->Position.x = 0;
@@ -53,8 +64,24 @@ void Player::Update(float deltaTime)
     {
         m_Transform->Position.y = 0;
     }
-    if (m_Transform->Position.y >= 540)
+
+    if (m_Transform->Position.y >= 500)
     {
-        m_Transform->Position.y = 540;
+        m_Transform->Position.y = 500;
+        m_Movement->Velocity.y = 0;
+        IsJumping = false;
+        IsFalling = false;
+        IsOnGround = true;
+    }
+
+    // Handle jumping logic
+    if (IsJumping)
+    {
+        float timer = 0.5f;
+        timer -= deltaTime;
+        if (timer <= 0)
+        {
+            IsJumping = false;
+        }
     }
 }

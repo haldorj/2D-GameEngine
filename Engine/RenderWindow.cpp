@@ -128,7 +128,7 @@ void RenderWindow::CreateRenderer()
         SDL_DestroyWindow(m_Window);
         SDL_Quit();
     }
-    //SDL_SetRenderDrawColor(m_Renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(m_Renderer, 50, 0, 100, 255);
 }
 
 RenderWindow::~RenderWindow()
