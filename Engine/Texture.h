@@ -12,8 +12,10 @@ public:
     ~Texture();
 
     void Render(glm::vec2 pos);
-
+    void Remove();
 private:
+    bool m_Active = true;
+
     SDL_Texture* texture;
     SDL_Renderer* renderer;
 };

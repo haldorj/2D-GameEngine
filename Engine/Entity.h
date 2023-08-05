@@ -22,8 +22,13 @@ public:
         return nullptr;
     }
 
+    void MarkForDeletion();
+    bool IsMarkedForDeletion();
+
 private:
     int m_Id;
     std::vector<Component*> m_Components;
     static int m_NextId;
+
+    bool m_IsMarkedForDeletion = false;
 };

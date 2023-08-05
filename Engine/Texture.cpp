@@ -25,5 +25,13 @@ void Texture::Render(glm::vec2 pos)
 {
     SDL_Rect destinationRect = { pos.x, pos.y, 0, 0 };
     SDL_QueryTexture(texture, nullptr, nullptr, &destinationRect.w, &destinationRect.h);
-    SDL_RenderCopy(renderer, texture, nullptr, &destinationRect);
+    if (m_Active)
+    {
+        SDL_RenderCopy(renderer, texture, nullptr, &destinationRect);
+    }
+}
+
+void Texture::Remove()
+{
+    m_Active = false;
 }

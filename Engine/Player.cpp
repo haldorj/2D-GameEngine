@@ -4,7 +4,7 @@ Player::Player(SDL_Renderer* renderer)
 {
     // Create components and assign them to member variables
     m_Sprite = new SpriteComponent();
-    m_Sprite->Sprite = new Texture(renderer, "../Textures/player.png");
+    m_Sprite->Sprite = new Texture(renderer, "../Textures/player2.png");
 
     m_Transform = new TransformComponent();
     m_Transform->Position.x = 100.0f;
@@ -17,7 +17,7 @@ Player::Player(SDL_Renderer* renderer)
     m_Movement->Deceleration = 0.0010;
 
     m_Collision = new CollisionComponent();
-    m_Collision->BoxCollider = glm::vec2(80,80);
+    m_Collision->BoxCollider = glm::vec2(64,64);
     m_Collision->Tag = "Player";
 
     m_KeyInput = new KeyInputComponent();

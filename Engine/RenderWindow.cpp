@@ -36,11 +36,11 @@ void RenderWindow::Update()
         entity.AddComponent(transform);
 
         SpriteComponent* sprite = new SpriteComponent();
-        sprite->Sprite = new Texture(m_Renderer, "../Textures/tex.png");
+        sprite->Sprite = new Texture(m_Renderer, "../Textures/coin.png");
         entity.AddComponent(sprite); 
 
         CollisionComponent* collision = new CollisionComponent();
-        collision->BoxCollider = glm::vec2(40, 40);
+        collision->BoxCollider = glm::vec2(32, 32);
         collision->Tag = "Coin";
         entity.AddComponent(collision);
 
@@ -73,9 +73,21 @@ void RenderWindow::Render()
         m_NPCMovementSystem.Update(m_Entities);
 
         SDL_RenderPresent(m_Renderer);
-        
+ 
         // Update player's movement every frame
         m_Player->Update(deltaTime);
+
+        // Iterate through each entity in reverse order
+        for (auto it = m_Entities.rbegin(); it != m_Entities.rend(); ++it)
+        {
+            Entity& entity = *it;
+
+            // Remove entity if it's marked for deletion
+            if (entity.IsMarkedForDeletion())
+            {
+                entity.GetComponent<SpriteComponent>()->Sprite->Remove();
+            }
+        }
 
         // Handle any pending SDL events
         SDL_Event event;

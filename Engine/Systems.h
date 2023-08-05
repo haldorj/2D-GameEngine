@@ -52,7 +52,9 @@ public:
 
             if (collision && transform)
             {
-                DrawCollisionBox(renderer, transform->Position, collision->BoxCollider);
+                // Collision boxes
+                // DrawCollisionBox(renderer, transform->Position, collision->BoxCollider);
+                //
                 // Check collisions with other entities
                 for (Entity& otherEntity : entities)
                 {
@@ -73,6 +75,7 @@ public:
                             if (collision->Tag == "Player" && otherCollision->Tag == "Coin")
                             {
                                 CollectCoin(entity, otherEntity);
+                                break;
                             }
                         }
                     }
@@ -100,24 +103,19 @@ public:
                 return true;
             }
         }
-
         // No collision
         return false;
     }
 
     void CollectCoin(Entity& playerEntity, Entity& coinEntity)
     {
-        std::cout << "Collision! \n";
+        coinEntity.MarkForDeletion();
     }
 
     void DrawCollisionBox(SDL_Renderer* renderer, const glm::vec2& position, const glm::vec2& collider)
     {
         // Scale factor to make the collision box more visible
         const float scaleFactor = 1.0f;
-
-        // Calculate the top-left corner of the rectangle
-        //int x = static_cast<int>(position.x - collider.x * scaleFactor * 0.5f);
-        //int y = static_cast<int>(position.x - collider.y * scaleFactor * 0.5f);
 
         // Calculate the width and height of the rectangle
         int width = static_cast<int>(collider.x * scaleFactor);
@@ -128,7 +126,6 @@ public:
         // Set the draw color for the renderer
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color (R, G, B, A)
         SDL_RenderFillRect(renderer, &rect);
-        // Draw the outline of the rectangle
         
         //SDL_RenderDrawRect(renderer, &rect);
     }
