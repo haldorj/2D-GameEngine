@@ -23,8 +23,10 @@ private:
     SDL_Renderer* m_Renderer;
 
     glm::vec2 m_MovementState;
+
     SpriteComponent* m_Sprite;
     TransformComponent* m_Transform;
     MovementComponent* m_Movement;
+    CollisionComponent* m_Collision;
     KeyInputComponent* m_KeyInput;
 };

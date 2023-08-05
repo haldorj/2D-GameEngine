@@ -16,12 +16,17 @@ Player::Player(SDL_Renderer* renderer)
     m_Movement->Acceleration = 0.0010;
     m_Movement->Deceleration = 0.0010;
 
+    m_Collision = new CollisionComponent();
+    m_Collision->BoxCollider = glm::vec2(80,80);
+    m_Collision->Tag = "Player";
+
     m_KeyInput = new KeyInputComponent();
 
     // Add the components to the entity
     AddComponent(m_Sprite);
     AddComponent(m_Transform);
     AddComponent(m_Movement);
+    AddComponent(m_Collision);
     AddComponent(m_KeyInput);
 }
 
@@ -99,6 +104,7 @@ void Player::Update(float deltaTime)
     // Handle jumping logic
     if (IsJumping)
     {
+        // Disable jumping -> gravity will affect the player
         IsJumping = false;
     }
 }

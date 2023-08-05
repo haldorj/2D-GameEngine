@@ -32,6 +32,7 @@ private:
 	// Create entities and add components
 	RenderSystem m_RenderSystem;
 	NPCMovementSystem m_NPCMovementSystem;
+	CollisionSystem m_CollisionSystem;
 
 	bool m_Quit = false;
 

@@ -39,6 +39,11 @@ void RenderWindow::Update()
         sprite->Sprite = new Texture(m_Renderer, "../Textures/tex.png");
         entity.AddComponent(sprite); 
 
+        CollisionComponent* collision = new CollisionComponent();
+        collision->BoxCollider = glm::vec2(40, 40);
+        collision->Tag = "Coin";
+        entity.AddComponent(collision);
+
         m_Entities.push_back(entity);
     }
 }
@@ -58,12 +63,17 @@ void RenderWindow::Render()
 
         ReadInput(deltaTime);  // Move input handling out of the event loop
 
+        SDL_SetRenderDrawColor(m_Renderer, 50, 0, 100, 255);
+
         SDL_RenderClear(m_Renderer);
+
+        // Render components in correct order.
+        m_CollisionSystem.Update(m_Renderer, m_Entities);
         m_RenderSystem.Update(m_Entities);
         m_NPCMovementSystem.Update(m_Entities);
 
         SDL_RenderPresent(m_Renderer);
-
+        
         // Update player's movement every frame
         m_Player->Update(deltaTime);
 
@@ -88,7 +98,6 @@ void RenderWindow::ReadInput(float deltaTime)
     {
         m_Quit = true;
     }
-
     if (m_Player)
     {
         m_Player->HandleInput(keystates, deltaTime);
@@ -103,7 +112,7 @@ void RenderWindow::CreateWindow(int width, int height)
     }
 
     m_Window = SDL_CreateWindow(
-        "SDL2 Window",
+        "Window",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         width,
@@ -128,7 +137,7 @@ void RenderWindow::CreateRenderer()
         SDL_DestroyWindow(m_Window);
         SDL_Quit();
     }
-    SDL_SetRenderDrawColor(m_Renderer, 50, 0, 100, 255);
+
 }
 
 RenderWindow::~RenderWindow()
