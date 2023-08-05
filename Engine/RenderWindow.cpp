@@ -45,18 +45,18 @@ void RenderWindow::Update()
 
 void RenderWindow::Render()
 {
-    Uint64 NOW = SDL_GetPerformanceCounter();
-    Uint64 LAST = 0;
-    double deltaTime = 0;
+    Uint64 currentTime = SDL_GetPerformanceCounter();
+    Uint64 lastTime = 0;
+    double deltaTime = 0.0;
 
     while (!m_Quit)
     {
-        LAST = NOW;
-        NOW = SDL_GetPerformanceCounter();
+        lastTime = currentTime;
+        currentTime = SDL_GetPerformanceCounter();
 
-        deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+        deltaTime = static_cast<double>((currentTime - lastTime) * 1000) / SDL_GetPerformanceFrequency();
 
-        ReadInput();  // Move input handling out of the event loop
+        ReadInput(deltaTime);  // Move input handling out of the event loop
 
         SDL_RenderClear(m_Renderer);
         m_RenderSystem.Update(m_Entities);
@@ -79,7 +79,7 @@ void RenderWindow::Render()
     }
 }
 
-void RenderWindow::ReadInput()
+void RenderWindow::ReadInput(float deltaTime)
 {
     const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
@@ -91,7 +91,7 @@ void RenderWindow::ReadInput()
 
     if (m_Player)
     {
-        m_Player->HandleInput(keystates);
+        m_Player->HandleInput(keystates, deltaTime);
     }
 }
 

@@ -25,6 +25,8 @@ struct TransformComponent : public Component
 struct MovementComponent : public Component
 {
     glm::vec2 Velocity = glm::vec2(0.0f, 0.0f);
+    float Acceleration = 0.0f;
+    float Deceleration = 0.0f;
 };
 
 struct KeyInputComponent : public Component

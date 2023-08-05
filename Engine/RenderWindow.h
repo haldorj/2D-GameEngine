@@ -19,7 +19,7 @@ public:
 
 	void CreateWindow(int width, int height);
 	void CreateRenderer();
-	void ReadInput();
+	void ReadInput(float deltaTime);
 	void Update();
 	void Render();
 
