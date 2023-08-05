@@ -1,7 +1,13 @@
 #pragma once
 
+#include <iostream>
+
 #include <SDL.h>
 #include <glm/glm.hpp>
+
+#include "Systems.h"
+
+#include <vector>
 
 class RenderWindow
 {
@@ -21,10 +27,10 @@ public:
 private:
 	//Entity* m_Player;
 
-	//std::vector<Entity> m_Entities;
+	std::vector<Entity> m_Entities;
 	// Create entities and add components
-	//RenderSystem m_RenderSystem;
-	//NPCMovementSystem m_NPCMovementSystem;
+	RenderSystem m_RenderSystem;
+	NPCMovementSystem m_NPCMovementSystem;
 
 	bool m_Quit = false;
 

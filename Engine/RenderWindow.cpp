@@ -14,33 +14,33 @@ RenderWindow::RenderWindow(int width, int height)
     CreateWindow(width, height);
 }
 
-//void RenderWindow::Update()
-//{
-//    m_Player = new Entity();
-//
-//    // Initialize random seed
-//    srand(time(NULL));
-//
-//    for (int i = 0; i < 10; i++)
-//    {
-//        int w = rand() % 700 + 0;
-//        int h = rand() % 500 + 0;
-//
-//        // Create an entity
-//        Entity entity;
-//
-//        // Create and add components
-//        TransformComponent* transform = new TransformComponent();
-//        transform->Position = glm::vec2(w, h);
-//        entity.AddComponent(transform);
-//
-//        SpriteComponent* sprite = new SpriteComponent();
-//        sprite->Sprite = new Texture(m_Renderer, "../Textures/tex.png");
-//        entity.AddComponent(sprite); 
-//
-//        m_Entities.push_back(entity);
-//    }
-//}
+void RenderWindow::Update()
+{
+    //m_Player = new Entity();
+
+    // Initialize random seed
+    srand(time(NULL));
+
+    for (int i = 0; i < 10; i++)
+    {
+        int w = rand() % 700 + 0;
+        int h = rand() % 500 + 0;
+
+        // Create an entity
+        Entity entity;
+
+        // Create and add components
+        TransformComponent* transform = new TransformComponent();
+        transform->Position = glm::vec2(w, h);
+        entity.AddComponent(transform);
+
+        SpriteComponent* sprite = new SpriteComponent();
+        sprite->Sprite = new Texture(m_Renderer, "../Textures/tex.png");
+        entity.AddComponent(sprite); 
+
+        m_Entities.push_back(entity);
+    }
+}
 
 void RenderWindow::Render()
 {
@@ -56,8 +56,8 @@ void RenderWindow::Render()
 
             SDL_RenderClear(m_Renderer); // Clear the renderer with the selected color
             // Render your content here
-            //m_RenderSystem.Update(m_Entities);
-            //m_NPCMovementSystem.Update(m_Entities);
+            m_RenderSystem.Update(m_Entities);
+            m_NPCMovementSystem.Update(m_Entities);
 
             SDL_RenderPresent(m_Renderer); // Present the renderer
             // You can add your rendering and game logic here
@@ -100,10 +100,6 @@ void RenderWindow::ReadInput()
     //    }
     //}
 
-}
-
-void RenderWindow::Update()
-{
 }
 
 void RenderWindow::CreateWindow(int width, int height)
