@@ -1,4 +1,5 @@
 #include "src/Core/Engine.h"
+#include "src/Timer/Timer.h"
 
 #include "iostream"
 
@@ -11,6 +12,7 @@ int main(int argc, char* argv[])
         Engine::GetInstance()->Events();
         Engine::GetInstance()->Update();
         Engine::GetInstance()->Render();
+        Timer::GetInstance()->Tick();
     }
 
     Engine::GetInstance()->Clean();

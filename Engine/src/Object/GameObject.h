@@ -7,13 +7,13 @@
 
 struct Properties
 {
-    Properties(std::string textureID, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE)
+    Properties(std::string textureID, int posx, int posy, int textureWidth, int textureHeight, SDL_RendererFlip flip = SDL_FLIP_NONE)
     {
-        X = x;
-        Y = y;
+        X = posx;
+        Y = posy;
         Flip = flip;
-        Width = width;
-        Height = height;
+        Width = textureWidth;
+        Height = textureHeight;
         TextureID = textureID;
     }
     

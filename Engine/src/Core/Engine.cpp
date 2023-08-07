@@ -6,6 +6,8 @@
 #include "../Physics/Transform.h"
 #include "../Graphics/TextureManager.h"
 #include "../Characters/Knight.h"
+#include "../Inputs/Input.h"
+#include "../Timer/Timer.h"
 
 Engine* Engine::s_Instance = nullptr;
 Knight* player = nullptr;
@@ -40,8 +42,8 @@ void Engine::Init()
         SDL_Quit();
     }
 
-    TextureManager::GetInstance()->Load("player", "Assets/Textures/knight idle.png");
-    player = new Knight(new Properties("player", 100, 200, 42, 42));
+    TextureManager::GetInstance()->Load("player", "Assets/Textures/char_blue_1.png");
+    player = new Knight(new Properties("player", 100, 200, 56, 56));
     
     Transform tf;
     tf.Log();
@@ -67,7 +69,8 @@ void Engine::Quit()
 
 void Engine::Update()
 {
-    player->Update(0);
+    float deltaTime = Timer::GetInstance()->GetDeltaTime();
+    player->Update(deltaTime);
 }
 
 void Engine::Render()
@@ -83,13 +86,5 @@ void Engine::Render()
 
 void Engine::Events()
 {
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        if (event.type == SDL_QUIT)
-        {
-            Quit();
-            break;
-        }
-    }
+    Input::GetInstance()->HandleEvents();
 }

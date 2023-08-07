@@ -24,6 +24,9 @@
     <ClCompile Include="src\Characters\Knight.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
+    <ClCompile Include="src\Inputs\Input.cpp" />
+    <ClCompile Include="src\Map\TileLayer.cpp" />
+    <ClCompile Include="src\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animations\Animation.h" />
@@ -31,8 +34,13 @@
     <ClInclude Include="src\Characters\Knight.h" />
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
+    <ClInclude Include="src\Inputs\Input.h" />
+    <ClInclude Include="src\Map\Layer.h" />
+    <ClInclude Include="src\Map\GameMap.h" />
+    <ClInclude Include="src\Map\TileLayer.h" />
     <ClInclude Include="src\Physics\RigidBody.h" />
     <ClInclude Include="src\Physics\Transform.h" />
+    <ClInclude Include="src\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\IObject.h" />
