@@ -19,19 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RenderWindow.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="src\Core\Engine.cpp" />
+    <ClCompile Include="src\Graphics\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Components.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="RenderWindow.h" />
-    <ClInclude Include="Systems.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="src\Characters\Character.h" />
+    <ClInclude Include="src\Core\Engine.h" />
+    <ClInclude Include="src\Graphics\TextureManager.h" />
+    <ClInclude Include="src\Physics\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Object\IObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Object\GameObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -86,20 +88,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)./ExternalLibs/SDL2/include;$(SolutionDir)./ExternalLibs/glm;$(SolutionDir)./ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)./ExternalLibs/SDL2/lib/x64;$(SolutionDir)./ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)./ExternalLibs/SDL2/include;$(SolutionDir)./ExternalLibs/glm;$(SolutionDir)./ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)./ExternalLibs/SDL2/lib/x64;$(SolutionDir)./ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)./ExternalLibs/SDL2/include;$(SolutionDir)./ExternalLibs/glm;$(SolutionDir)./ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)./ExternalLibs/SDL2/lib/x64;$(SolutionDir)./ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)./ExternalLibs/SDL2/include;$(SolutionDir)./ExternalLibs/glm;$(SolutionDir)./ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)./ExternalLibs/SDL2/lib/x64;$(SolutionDir)./ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
