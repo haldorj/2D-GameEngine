@@ -15,8 +15,8 @@ public:
     {
         std::cout << msg << "(X Y) = " << "(" << X << " " << Y << ")\n";
     }
-private:
+    
     void TranslateX(float x) { X += x; }
-    void TranslateY(float x) { X += x; }
+    void TranslateY(float y) { Y += y; }
     void Translate(glm::vec2 v) { X += v.x; Y += v.y; }
 };

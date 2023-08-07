@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "../Animations/Animation.h"
+#include "../Physics/RigidBody.h"
 
 class Knight : public Character
 {
@@ -12,4 +13,5 @@ public:
     virtual void Clean();
 private:
     Animation* m_Animation;
+    RigidBody* m_RigidBody;
 };

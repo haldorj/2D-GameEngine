@@ -31,6 +31,7 @@
     <ClInclude Include="src\Characters\Knight.h" />
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
+    <ClInclude Include="src\Physics\RigidBody.h" />
     <ClInclude Include="src\Physics\Transform.h" />
   </ItemGroup>
   <ItemGroup>
