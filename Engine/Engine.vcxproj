@@ -20,11 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Animations\Animation.cpp" />
+    <ClCompile Include="src\Characters\Knight.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Animations\Animation.h" />
     <ClInclude Include="src\Characters\Character.h" />
+    <ClInclude Include="src\Characters\Knight.h" />
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
     <ClInclude Include="src\Physics\Transform.h" />

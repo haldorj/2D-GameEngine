@@ -5,8 +5,10 @@
 
 #include "../Physics/Transform.h"
 #include "../Graphics/TextureManager.h"
+#include "../Characters/Knight.h"
 
 Engine* Engine::s_Instance = nullptr;
+Knight* player = nullptr;
 
 void Engine::Init()
 {
@@ -38,8 +40,9 @@ void Engine::Init()
         SDL_Quit();
     }
 
-    TextureManager::GetInstance()->Load("player", "Assets/Textures/player.png");
-
+    TextureManager::GetInstance()->Load("player", "Assets/Textures/knight idle.png");
+    player = new Knight(new Properties("player", 100, 200, 42, 42));
+    
     Transform tf;
     tf.Log();
     
@@ -64,7 +67,7 @@ void Engine::Quit()
 
 void Engine::Update()
 {
-
+    player->Update(0);
 }
 
 void Engine::Render()
@@ -73,7 +76,7 @@ void Engine::Render()
 
     SDL_RenderClear(m_Renderer);
 
-    TextureManager::GetInstance()->Draw("player", 100, 100, 64,64);
+    player->Draw();
 
     SDL_RenderPresent(m_Renderer);
 }
