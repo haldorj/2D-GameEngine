@@ -10,16 +10,6 @@ m_TileSize(tileSize), m_RowCount(rowCount), m_ColCount(colCount), m_TileMap(tile
     for (unsigned int i = 0; i < m_Tilesets.size(); i++)
     {
         TextureManager::GetInstance()->Load(m_Tilesets[i].Name, "Assets/Maps/" + m_Tilesets[i].Source);
-        std::cout << "Assets/Maps/" << m_Tilesets[i].Source <<"\n";
-    }
-
-    for (unsigned int i = 0; i < m_RowCount; i++)
-    {
-        for (unsigned int j = 0; j < m_ColCount; j++)
-        {
-            std::cout << m_TileMap[i][j] << " ";
-        }
-        std::cout << std::endl;
     }
 }
 

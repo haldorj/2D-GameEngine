@@ -33,6 +33,9 @@ void Knight::Update(float deltaTime)
     m_RigidBody->Update(deltaTime);
     m_Transform->TranslateX(m_RigidBody->GetPosition().x);
     //m_Transform->TranslateY(m_RigidBody->GetPosition().y);
+
+    m_Origin.x = m_Transform->X + m_Width/2;
+    m_Origin.y = m_Transform->Y + m_Height/2;
     
     m_Animation->Update();
 }

@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 #include "../Core/Engine.h"
+#include "../Camera/Camera.h"
 
 #include <SDL_image.h>
 
@@ -42,21 +43,24 @@ void TextureManager::Clean()
 void TextureManager::Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect = {0, 0, width, height};
-    SDL_Rect dstRect = {x, y, width, height};
+    glm::vec2 camera = Camera::GetInstance()->GetPosition() * glm::vec2(0.25);
+    SDL_Rect dstRect = {x - camera.x, y - camera.y, width, height};
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 }
 
 void TextureManager::DrawTile(std::string id, int tilesize, int x, int y, int row, int col, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect = {tilesize*col, tilesize*(row), tilesize, tilesize};
-    SDL_Rect dstRect = {x, y, tilesize, tilesize};
+    glm::vec2 camera = Camera::GetInstance()->GetPosition();
+    SDL_Rect dstRect = {x - camera.x, y - camera.y, tilesize, tilesize};
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 }
 
 void TextureManager::DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame,
                                SDL_RendererFlip flip)
 {
+    glm::vec2 camera = Camera::GetInstance()->GetPosition();
     SDL_Rect srcRect = {width * frame, height * (row-1), width, height};
-    SDL_Rect dstRect = {x, y, width, height};
+    SDL_Rect dstRect = {x - camera.x, y - camera.y, width, height};
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), m_TextureMap[id], &srcRect, &dstRect, 0, nullptr, flip);
 }

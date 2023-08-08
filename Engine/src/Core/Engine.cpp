@@ -9,6 +9,7 @@
 #include "../Inputs/Input.h"
 #include "../Timer/Timer.h"
 #include "../Map/MapParser.h"
+#include "../Camera/Camera.h"
 
 Engine* Engine::s_Instance = nullptr;
 Knight* player = nullptr;
@@ -52,10 +53,8 @@ void Engine::Init()
     
 
     TextureManager::GetInstance()->Load("player", "Assets/Textures/char_blue_1.png");
+    TextureManager::GetInstance()->Load("bg", "Assets/Backgrounds/BG.png");
     player = new Knight(new Properties("player", 100, 200, 56, 56));
-    
-    Transform tf;
-    tf.Log();
     
     m_IsRunning = true;
 }
@@ -79,15 +78,19 @@ void Engine::Quit()
 void Engine::Update()
 {
     float deltaTime = Timer::GetInstance()->GetDeltaTime();
-    m_LevelMap->Update();
     player->Update(deltaTime);
+    m_LevelMap->Update();
+    Camera::GetInstance()->SetTarget(player->GetOrigin());
+    Camera::GetInstance()->Update(deltaTime);
 }
 
 void Engine::Render()
 {
     SDL_SetRenderDrawColor(m_Renderer, 124, 210, 254, 255);
 
+    
     SDL_RenderClear(m_Renderer);
+    TextureManager::GetInstance()->Draw("bg", 0,0,1920,640);
 
     m_LevelMap->Render();
     player->Draw();

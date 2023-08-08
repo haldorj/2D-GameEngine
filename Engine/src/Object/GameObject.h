@@ -33,13 +33,17 @@ public:
         m_Width = properties->Width;
         m_Height = properties->Height;
         m_Flip = properties->Flip;
+        m_Origin = glm::vec2((properties->X + properties->Width)/2 ,(properties->Y + properties->Height)/2);
     }
     
     virtual void Draw() = 0;
     virtual void Update(float deltaTime) = 0;
     virtual void Clean() = 0;
+
+    glm::vec2 GetOrigin() { return m_Origin; }
     
 protected:
+    glm::vec2 m_Origin;
     Transform* m_Transform;
     int m_Width, m_Height;
     std::string m_TextureID;
