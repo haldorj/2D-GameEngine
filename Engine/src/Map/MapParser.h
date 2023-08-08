@@ -18,7 +18,7 @@ public:
     
 private:
     bool Parse(std::string id, std::string source);
-    Tileset ParseTileset(tinyxml2::XMLElement* xmlTileset = nullptr);
+    Tileset ParseTileset(tinyxml2::XMLElement* xmlTileset);
     TileLayer* ParseTileLayer(tinyxml2::XMLElement* xmlLayer, TileSetList tilesets, int tileSize, int rowCount, int colCount);
     
     MapParser() {}

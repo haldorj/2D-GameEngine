@@ -8,11 +8,13 @@ MapParser* MapParser::s_Instance = nullptr;
 
 bool MapParser::Load()
 {
-    return Parse("map", "Assets/Maps/map1.tmx");
+    // ok
+    return Parse("map", "Assets/Maps/map.tmx");
 }
 
 bool MapParser::Parse(std::string id, std::string source)
 {
+    // create a TinyXML document and load the map XML
     tinyxml2::XMLDocument xml;
     xml.LoadFile(source.c_str());
 
@@ -22,7 +24,8 @@ bool MapParser::Parse(std::string id, std::string source)
         return false;
     }
     std::cerr << "Loaded: " << source << " successfully. Error: " << xml.ErrorName() << std::endl;
-    
+
+    // get the root node
     tinyxml2::XMLElement* root = xml.RootElement();
     int rowcount, colcount, tilesize = 0;
     root->QueryIntAttribute("width", &colcount);
@@ -60,6 +63,7 @@ bool MapParser::Parse(std::string id, std::string source)
 
 Tileset MapParser::ParseTileset(tinyxml2::XMLElement* xmlTileset)
 {
+    // ok
     Tileset tileset;
     
     tileset.Name = xmlTileset->Attribute("name");
@@ -76,6 +80,9 @@ Tileset MapParser::ParseTileset(tinyxml2::XMLElement* xmlTileset)
     tinyxml2::XMLElement* image = xmlTileset->FirstChildElement();
     tileset.Source = image->Attribute("source");
 
+    // SDL_Log("name: %s, firstgid: %i, tilecount: %i, rows: %i, columns: %i, tilewidth: %i, source: %s",
+    //     tileset.Name.c_str(), tileset.FirstID, tileset.TileCount, tileset.RowCount, tileset.ColCount, tileset.TileSize, tileset.Source.c_str());
+    
     return tileset;
 }
 
@@ -92,7 +99,7 @@ TileLayer* MapParser::ParseTileLayer(tinyxml2::XMLElement* xmlLayer, TileSetList
         }
     }
 
-    if (!data) return nullptr;
+    if (!data) { std::cout << "No data \n"; return nullptr; }
 
     std::string matrix = std::string(data->GetText());
     std::istringstream iss(matrix);
