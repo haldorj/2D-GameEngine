@@ -25,8 +25,10 @@
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
     <ClCompile Include="src\Inputs\Input.cpp" />
+    <ClCompile Include="src\Map\MapParser.cpp" />
     <ClCompile Include="src\Map\TileLayer.cpp" />
     <ClCompile Include="src\Timer\Timer.cpp" />
+    <ClCompile Include="Vendor\TinyXML2\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animations\Animation.h" />
@@ -37,10 +39,12 @@
     <ClInclude Include="src\Inputs\Input.h" />
     <ClInclude Include="src\Map\Layer.h" />
     <ClInclude Include="src\Map\GameMap.h" />
+    <ClInclude Include="src\Map\MapParser.h" />
     <ClInclude Include="src\Map\TileLayer.h" />
     <ClInclude Include="src\Physics\RigidBody.h" />
     <ClInclude Include="src\Physics\Transform.h" />
     <ClInclude Include="src\Timer\Timer.h" />
+    <ClInclude Include="Vendor\TinyXML2\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Object\IObject.h" />
@@ -103,18 +107,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)../ExternalLibs/SDL2/include;$(SolutionDir)../ExternalLibs/glm;$(SolutionDir)../ExternalLibs/SDL2Image/include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)../ExternalLibs/SDL2/lib/x64;$(SolutionDir)../ExternalLibs/SDL2Image/lib/x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -122,6 +130,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>tinyxml2.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,6 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>tinyxml2.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,6 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>tinyxml2.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -167,6 +178,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>tinyxml2.h;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

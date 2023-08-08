@@ -8,6 +8,7 @@
 #include "../Characters/Knight.h"
 #include "../Inputs/Input.h"
 #include "../Timer/Timer.h"
+#include "../Map/MapParser.h"
 
 Engine* Engine::s_Instance = nullptr;
 Knight* player = nullptr;
@@ -20,13 +21,15 @@ void Engine::Init()
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
     }
 
+    SDL_WindowFlags window = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    
     m_Window = SDL_CreateWindow(
         "Window",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         SCREEN_WIDTH,
         SCREEN_HEIGHT,
-        SDL_WINDOW_SHOWN
+        window
     );
 
     if (m_Window == nullptr) {
@@ -41,6 +44,12 @@ void Engine::Init()
         SDL_DestroyWindow(m_Window);
         SDL_Quit();
     }
+
+    if (MapParser::GetInstance()->Load())
+        m_LevelMap = MapParser::GetInstance()->GetMap("map");
+    else
+        std::cout << "Failed to load map." << std::endl;
+    
 
     TextureManager::GetInstance()->Load("player", "Assets/Textures/char_blue_1.png");
     player = new Knight(new Properties("player", 100, 200, 56, 56));
@@ -70,6 +79,7 @@ void Engine::Quit()
 void Engine::Update()
 {
     float deltaTime = Timer::GetInstance()->GetDeltaTime();
+    m_LevelMap->Update();
     player->Update(deltaTime);
 }
 
@@ -79,6 +89,7 @@ void Engine::Render()
 
     SDL_RenderClear(m_Renderer);
 
+    m_LevelMap->Render();
     player->Draw();
 
     SDL_RenderPresent(m_Renderer);
