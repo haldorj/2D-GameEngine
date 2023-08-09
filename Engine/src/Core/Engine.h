@@ -9,6 +9,8 @@
 class Engine
 {
 public:
+    static Engine* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Engine(); }
+    
     void Init();
     bool Clean();
     void Quit();
@@ -17,9 +19,8 @@ public:
     void Render();
     void Events();
 
+    GameMap* GetMap() { return m_LevelMap; }
     bool IsRunning() const { return m_IsRunning; }
-
-    static Engine* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Engine(); }
     SDL_Renderer* GetRenderer() { return m_Renderer; }
     
 private:

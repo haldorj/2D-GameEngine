@@ -23,6 +23,7 @@
     <ClCompile Include="src\Animations\Animation.cpp" />
     <ClCompile Include="src\Camera\Camera.cpp" />
     <ClCompile Include="src\Characters\Knight.cpp" />
+    <ClCompile Include="src\Collision\CollisionHandler.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Graphics\TextureManager.cpp" />
     <ClCompile Include="src\Inputs\Input.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="src\Camera\Camera.h" />
     <ClInclude Include="src\Characters\Character.h" />
     <ClInclude Include="src\Characters\Knight.h" />
+    <ClInclude Include="src\Collision\CollisionHandler.h" />
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Graphics\TextureManager.h" />
     <ClInclude Include="src\Inputs\Input.h" />
@@ -43,6 +45,7 @@
     <ClInclude Include="src\Map\GameMap.h" />
     <ClInclude Include="src\Map\MapParser.h" />
     <ClInclude Include="src\Map\TileLayer.h" />
+    <ClInclude Include="src\Physics\Collider.h" />
     <ClInclude Include="src\Physics\RigidBody.h" />
     <ClInclude Include="src\Physics\Transform.h" />
     <ClInclude Include="src\Timer\Timer.h" />

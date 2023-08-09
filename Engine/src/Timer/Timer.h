@@ -1,7 +1,7 @@
 #pragma once
 
-const int TARGET_FPS = 60;
-const float TARGET_DELTATIME = 1.5f;
+const float TARGET_FPS = 60.0f;
+const float TARGET_DELTATIME = 0.1f;
 
 class Timer
 {
