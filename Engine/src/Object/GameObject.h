@@ -7,7 +7,7 @@
 
 struct Properties
 {
-    Properties(std::string textureID, int posx, int posy, int textureWidth, int textureHeight, SDL_RendererFlip flip = SDL_FLIP_NONE)
+    Properties(std::string textureID, float posx, float posy, int textureWidth, int textureHeight, SDL_RendererFlip flip = SDL_FLIP_NONE)
     {
         X = posx;
         Y = posy;
@@ -35,10 +35,10 @@ public:
         m_Flip = properties->Flip;
         m_Origin = glm::vec2((properties->X + properties->Width)/2 ,(properties->Y + properties->Height)/2);
     }
-    
-    virtual void Draw() = 0;
-    virtual void Update(float deltaTime) = 0;
-    virtual void Clean() = 0;
+
+    void Draw() override {}
+    void Update(float deltaTime) override {}
+    void Clean() override {}
 
     glm::vec2 GetOrigin() { return m_Origin; }
     

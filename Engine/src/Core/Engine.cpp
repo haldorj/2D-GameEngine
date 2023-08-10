@@ -52,9 +52,16 @@ void Engine::Init()
         std::cout << "Failed to load map." << std::endl;
     
 
-    TextureManager::GetInstance()->Load("player", "Assets/Textures/char_blue_1.png");
+    //TextureManager::GetInstance()->Load("player", "Assets/Textures/char_blue_1.png");
+    TextureManager::GetInstance()->Load("knight_idle", "Assets/Textures/Knight/_Idle.png");
+    TextureManager::GetInstance()->Load("knight_run", "Assets/Textures/Knight/_Run.png");
+    TextureManager::GetInstance()->Load("knight_jump", "Assets/Textures/Knight/_Jump.png");
+    TextureManager::GetInstance()->Load("knight_fall", "Assets/Textures/Knight/_Fall.png");
+    TextureManager::GetInstance()->Load("knight_crouch", "Assets/Textures/Knight/_Crouch.png");
+    TextureManager::GetInstance()->Load("knight_attack", "Assets/Textures/Knight/_Attack.png");
+
     TextureManager::GetInstance()->Load("bg", "Assets/Backgrounds/BG.png");
-    player = new Knight(new Properties("player", 100, 200, 56, 56));
+    player = new Knight(new Properties("player", 100, 200, 120, 80));
     
     m_IsRunning = true;
 }

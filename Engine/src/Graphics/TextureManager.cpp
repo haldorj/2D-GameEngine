@@ -20,6 +20,9 @@ bool TextureManager::Load(std::string id, const std::string& filePath)
         SDL_Log("Failed to create texture from surface: %s", SDL_GetError());
         return false;
     }
+
+    //SDL_Log("Loaded: %s \n", filePath.c_str());
+    
     m_TextureMap[id] = texture;
     return true;
 }

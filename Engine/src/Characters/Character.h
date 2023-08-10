@@ -7,11 +7,11 @@ class Character : public GameObject
 {
 public:
     Character(Properties* properties) : GameObject(properties) {}
-    
-    virtual void Draw() = 0;
-    virtual void Update(float deltaTime) = 0;
-    virtual void Clean() = 0;
-    
+
+    void Draw() override {}
+    void Update(float deltaTime) override {}
+    void Clean() override {}
+
 protected:
     std::string m_Name;
 };

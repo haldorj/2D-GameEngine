@@ -1,7 +1,8 @@
 #pragma once
+#include <SDL.h>
 
 const float TARGET_FPS = 60.0f;
-const float TARGET_DELTATIME = 0.1f;
+const float TARGET_DELTATIME = 1.0f / TARGET_FPS;
 
 class Timer
 {
@@ -14,7 +15,7 @@ public:
 private:
     Timer(){}
     static Timer* s_Instance;
-    float m_DeltaTime = 0;
-    float m_LastTime = 0;
     
+    float m_LastTime = 0;
+    float m_DeltaTime = 0;
 };
